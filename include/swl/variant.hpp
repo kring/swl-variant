@@ -236,12 +236,16 @@ class variant : private vimpl::variant_tag {
 	
 	// ================================ destructors (20.7.3.3)
 	
-	constexpr ~variant() requires trivial_dtor = default;
-	
-	constexpr ~variant() requires (not trivial_dtor) {
-		reset();
-	}
-	
+	//constexpr ~variant() requires trivial_dtor = default;
+	//
+	//constexpr ~variant() requires (not trivial_dtor) {
+	//	reset();
+	//}
+
+	constexpr ~variant() {
+      reset();
+  }
+
 	// ================================ assignment (20.7.3.4)
 	
 	// copy assignment (trivial)

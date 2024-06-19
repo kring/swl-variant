@@ -128,8 +128,8 @@ using union_index_t = unsigned;
 	SFM(constexpr X (const X &), copy_constructible) \
 	SFM(constexpr X (X&&), move_constructible) \
 	SFM(constexpr X& operator=(const X&), copy_assignable) \
-	SFM(constexpr X& operator=(X&&), move_assignable) \
-	SFM(constexpr ~X(), destructible)
+	SFM(constexpr X& operator=(X&&), move_assignable) //\
+	//SFM(constexpr ~X(), destructible)
 
 template <bool IsLeaf>
 struct node_trait;
@@ -214,6 +214,8 @@ struct union_node {
 	}
 	
 	INJECT_UNION_SFM(union_node)
+
+	constexpr ~union_node() {}
 };
 
 #undef INJECT_UNION_SFM
