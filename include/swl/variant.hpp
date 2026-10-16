@@ -820,7 +820,7 @@ constexpr auto&& unsafe_get(Var&& var) noexcept {
 		struct hash<swl::variant<Ts...>> {
 			std::size_t operator()(const swl::variant<Ts...>& v) const {
 				if constexpr ( swl::variant<Ts...>::can_be_valueless )
-					if (v.valueless_by_exception()) return -1;
+					if (v.valueless_by_exception()) return (std::size_t)-1;
 		
 				return swl::vimpl::visit_with_index( v, [] (auto& elem, auto index_) {
 					using type = std::remove_cvref_t<decltype(elem)>;
@@ -831,7 +831,7 @@ constexpr auto&& unsafe_get(Var&& var) noexcept {
 
 		template <>
 		struct hash<swl::monostate> {
-			constexpr std::size_t operator()(swl::monostate) const noexcept { return -1; }
+			constexpr std::size_t operator()(swl::monostate) const noexcept { return (std::size_t)-1; }
 		};
 	}
 #else
